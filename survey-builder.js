@@ -159,12 +159,30 @@ function deleteQuestion(questionId) {
     
     // Remove question from survey data
     surveyData.questions = surveyData.questions.filter(q => q.id !== questionId);
+    
+    // Update remaining question IDs
+    const questionList = document.getElementById('questionList');
+    const questions = questionList.querySelectorAll('.question-item');
+    questions.forEach((q, index) => {
+        const newId = `question-${index + 1}`;
+        q.id = newId;
+        // Update any references to the question ID in the question's HTML
+        const inputs = q.querySelectorAll('input[type="radio"]');
+        inputs.forEach(input => {
+            input.name = newId;
+        });
+    });
 }
 
 // Preview survey
 function previewSurvey() {
     // Save current survey data
     updateSurveyData();
+    
+    // Validate survey before preview
+    if (!validateSurvey()) {
+        return;
+    }
     
     // Open preview in new window
     const previewWindow = window.open('', '_blank');
@@ -273,62 +291,50 @@ function saveSurvey() {
 
 // Update survey data from form
 function updateSurveyData() {
-    // Update basic info
-    surveyData.title = document.getElementById('surveyTitle').value;
-    surveyData.description = document.getElementById('surveyDescription').value;
+    const questionList = document.getElementById('questionList');
+    const questions = questionList.querySelectorAll('.question-item');
     
-    // Update settings
-    surveyData.settings = {
-        anonymousResponses: document.getElementById('anonymousResponses').checked,
-        multipleResponses: document.getElementById('multipleResponses').checked,
-        requireLogin: document.getElementById('requireLogin').checked,
-        showProgress: document.getElementById('showProgress').checked
-    };
-    
-    // Update questions
-    const questionElements = document.querySelectorAll('.question-item');
-    surveyData.questions = Array.from(questionElements).map(element => {
-        const questionData = {
-            id: element.id,
-            text: element.querySelector('.question-text').value,
-            required: element.querySelector('.question-settings input[type="checkbox"]').checked
-        };
+    surveyData.questions = Array.from(questions).map((q, index) => {
+        const questionText = q.querySelector('.question-text').value;
+        const type = q.querySelector('.question-text').getAttribute('data-type') || 'text';
+        const required = q.querySelector('input[type="checkbox"]').checked;
         
-        // Get question type specific data
-        if (element.querySelector('.option-list')) {
-            questionData.type = 'multiple-choice';
-            questionData.options = Array.from(element.querySelectorAll('.option-item input')).map(input => input.value);
-        } else if (element.querySelector('.rating-scale')) {
-            questionData.type = 'rating';
-            questionData.scale = parseInt(element.querySelector('.scale-input').value);
-        } else if (element.querySelector('.text-response')) {
-            questionData.type = 'text';
-            questionData.textType = element.querySelector('.text-type').value;
-        } else if (element.querySelector('.yes-no-options')) {
-            questionData.type = 'yes-no';
+        let options = [];
+        if (type === 'multiple-choice') {
+            const optionInputs = q.querySelectorAll('.option-item input[type="text"]');
+            options = Array.from(optionInputs).map(input => input.value);
         }
         
-        return questionData;
+        return {
+            id: `question-${index + 1}`,
+            type,
+            text: questionText,
+            required,
+            options
+        };
     });
 }
 
-// Validate survey before saving
+// Validate survey before preview or save
 function validateSurvey() {
     if (!surveyData.title.trim()) {
+        alert('Please enter a survey title');
         return false;
     }
     
     if (surveyData.questions.length === 0) {
+        alert('Please add at least one question to the survey');
         return false;
     }
     
     for (const question of surveyData.questions) {
         if (!question.text.trim()) {
+            alert('All questions must have text');
             return false;
         }
         
-        if (question.type === 'multiple-choice' && 
-            (!question.options.length || !question.options.some(opt => opt.trim()))) {
+        if (question.type === 'multiple-choice' && question.options.length < 2) {
+            alert('Multiple choice questions must have at least 2 options');
             return false;
         }
     }

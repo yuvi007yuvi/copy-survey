@@ -3,98 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ID Card Maker</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>DS Counseling Poll Metrics - ID Card Maker</title>
+    
+    <!-- Stylesheet Links -->
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- HTML2PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
+    <!-- Header Section with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-chart-pie"></i>
+                <h1>DS Counseling Poll Metrics</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#home">Home</a></li>
+                <li><a href="../index.html#surveys">Surveys</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+                <li><a href="#" class="active">ID-CARD-MAKER</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
     <!-- Login Screen -->
-    <div id="loginScreen" class="login-screen">
+    <section id="loginScreen" class="login-screen">
         <div class="login-box">
-            <h2>ID Card Maker Login</h2>
+            <div class="section-header">
+                <h2>ID Card Maker Login</h2>
+                <p>Enter your credentials to access the ID card maker</p>
+            </div>
             <form onsubmit="handleLogin(event)">
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" required>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-input">
+                        <input type="password" id="password" required>
+                        <i class="fas fa-lock"></i>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <button type="submit" class="primary-btn">Login</button>
             </form>
         </div>
-    </div>
+    </section>
 
     <!-- Main Content -->
-    <div id="mainContent" style="display: none;">
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">ID Card Maker</h1>
-        <div class="row">
+    <section id="mainContent" class="id-card-maker" style="display: none;">
+        <div class="section-header">
+            <h2>ID Card Maker</h2>
+            <p>Create professional ID cards for your organization</p>
+        </div>
+        <div class="id-card-container">
             <!-- Input Form -->
-            <div class="col-md-6">
+            <div class="form-section">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Enter Details</h5>
-                        <form id="idCardForm">
-                            <div class="mb-3">
-                                <label for="companyLogo" class="form-label">Company Logo</label>
-                                <input type="file" class="form-control" id="companyLogo" accept="image/*">
-                            </div>
-                            <div class="mb-3">
-                                <label for="photo" class="form-label">Employee Photo</label>
-                                <input type="file" class="form-control" id="photo" accept="image/*" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="designation" class="form-label">Designation</label>
-                                <input type="text" class="form-control" id="designation" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="employeeId" class="form-label">Employee ID</label>
-                                <input type="text" class="form-control" id="employeeId" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="department" class="form-label">Department</label>
-                                <input type="text" class="form-control" id="department" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="validUntil" class="form-label">Valid Until</label>
-                                <input type="date" class="form-control" id="validUntil" required>
-                            </div>
-                            <button type="button" class="btn btn-primary" id="generatePDF">Export as PDF</button>
-                        </form>
-                    </div>
+                    <h3>Enter Details</h3>
+                    <form id="idCardForm">
+                        <div class="form-group">
+                            <label for="companyLogo">
+                                <i class="fas fa-building"></i>
+                                Company Logo
+                            </label>
+                            <input type="file" id="companyLogo" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <label for="photo">
+                                <i class="fas fa-user"></i>
+                                Employee Photo
+                            </label>
+                            <input type="file" id="photo" accept="image/*" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">
+                                <i class="fas fa-user-circle"></i>
+                                Full Name
+                            </label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="designation">
+                                <i class="fas fa-briefcase"></i>
+                                Designation
+                            </label>
+                            <input type="text" id="designation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="employeeId">
+                                <i class="fas fa-id-badge"></i>
+                                Employee ID
+                            </label>
+                            <input type="text" id="employeeId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="department">
+                                <i class="fas fa-users"></i>
+                                Department
+                            </label>
+                            <input type="text" id="department" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="validUntil">
+                                <i class="fas fa-calendar"></i>
+                                Valid Until
+                            </label>
+                            <input type="date" id="validUntil" required>
+                        </div>
+                        <div class="export-buttons">
+                            <button type="button" id="generatePDF" class="primary-btn">
+                                <i class="fas fa-file-pdf"></i> Export as PDF
+                            </button>
+                            <button type="button" id="generateImage" class="primary-btn secondary">
+                                <i class="fas fa-image"></i> Export as Image
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <!-- Live Preview -->
-            <div class="col-md-6">
+            <div class="preview-section">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Preview</h5>
-                        <div id="idCardPreview" class="id-card">
-                            <div class="id-card-header">
-                                <img id="previewLogo" src="default-logo.svg" alt="Company Logo" class="company-logo">
-                                <h2>EMPLOYEE ID CARD</h2>
-                            </div>
-                            <div class="id-card-photo">
-                                <img id="previewPhoto" src="placeholder.png" alt="Employee Photo">
-                            </div>
-                            <div class="id-card-details">
-                                <p><strong>Name:</strong> <span id="previewName">John Doe</span></p>
-                                <p><strong>Designation:</strong> <span id="previewDesignation">Software Engineer</span></p>
-                                <p><strong>Employee ID:</strong> <span id="previewEmployeeId">EMP001</span></p>
-                                <p><strong>Department:</strong> <span id="previewDepartment">IT</span></p>
-                                <p><strong>Valid Until:</strong> <span id="previewValidUntil">2024-12-31</span></p>
-                            </div>
+                    <h3>Preview</h3>
+                    <div id="idCardPreview" class="id-card">
+                        <div class="wave-bg"></div>
+                        <div class="id-card-header">
+                            <img id="previewLogo" src="image.png" alt="Company Logo" class="company-logo">
+                        </div>
+                        <div class="id-card-photo">
+                            <img id="previewPhoto" src="placeholder.png" alt="Employee Photo">
+                        </div>
+                        <div class="id-card-details">
+                            <p><i class="fas fa-user"></i> <span id="previewName">John Doe</span></p>
+                            <p><i class="fas fa-briefcase"></i> <span id="previewDesignation">Software Engineer</span></p>
+                            <p><i class="fas fa-id-badge"></i> <span id="previewEmployeeId">EMP001</span></p>
+                            <p><i class="fas fa-users"></i> <span id="previewDepartment">IT</span></p>
+                            <p><i class="fas fa-calendar"></i> <span id="previewValidUntil">2024-12-31</span></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    </div>
-    <script src="script.js"></script>
-    <script src="login.js"></script>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column company-info">
+                <div class="footer-logo">
+                    <i class="fas fa-chart-pie"></i>
+                    <h2>DS Counseling Poll Metrics</h2>
+                </div>
+                <p>Creating better counseling experiences through data</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DS Counseling Poll Metrics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Handle any errors that might occur during script loading
+        window.onerror = function(msg, url, lineNo, columnNo, error) {
+            console.log('Error: ' + msg + '\nURL: ' + url + '\nLine: ' + lineNo + '\nColumn: ' + columnNo + '\nError object: ' + JSON.stringify(error));
+            return false;
+        };
+
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mobile menu
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+    <script src="login.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

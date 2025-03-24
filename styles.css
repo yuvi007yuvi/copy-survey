@@ -1,6 +1,6 @@
 /* Global Styles */
 :root {
-    --primary-color: #4361ee;
+    --primary-color: #0b8b78;
     --secondary-color: #3a0ca3;
     --accent-color: #4cc9f0;
     --text-color: #333;
@@ -15,7 +15,7 @@
     --transition: all 0.3s ease;
     --input-bg: #f5f5f5;
     --input-border: #ddd;
-    --input-focus: #4361ee;
+    --input-focus: #92a1e4;
 }
 
 * {
@@ -532,6 +532,8 @@ header {
     justify-content: space-between;
     padding: 100px 5%;
     background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-content {
@@ -587,11 +589,139 @@ header {
     transform: translateY(-3px);
 }
 
-.hero-image {
+.hero-illustrations {
+    position: relative;
     flex: 1;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image {
+    position: relative;
+    z-index: 2;
+}
+
+.main-illustration {
     max-width: 500px;
+    height: auto;
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.floating-element {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: float 4s ease-in-out infinite;
+}
+
+.floating-element i {
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+.element1 {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.element2 {
+    top: 40%;
+    right: 15%;
+    animation-delay: 1s;
+}
+
+.element3 {
+    bottom: 30%;
+    left: 20%;
+    animation-delay: 2s;
+}
+
+.element4 {
+    bottom: 20%;
+    right: 25%;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Add a subtle pulse animation to the icons */
+.floating-element i {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Add hover effects to floating elements */
+.floating-element:hover {
+    transform: scale(1.1);
+    background: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.floating-element:hover i {
+    color: white;
+}
+
+/* Responsive adjustments for hero section */
+@media (max-width: 1024px) {
+    .hero-illustrations {
+        margin-top: 50px;
+    }
+    
+    .floating-element {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .floating-element i {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-elements {
+        display: none;
+    }
+    
+    .main-illustration {
+        max-width: 300px;
+    }
 }
 
 /* Features Section */
@@ -727,8 +857,6 @@ header {
     box-shadow: var(--box-shadow);
 }
 
-
-
 /* Survey Types Section */
 .survey-types {
     background-color: var(--light-bg);
@@ -773,15 +901,15 @@ header {
     transition: all 0.3s ease;
 }
 
-.survey-card:hover .survey-icon {
-    background: var(--primary-color);
-    color: white;
-}
-
 .survey-icon i {
     font-size: 24px;
     color: var(--primary-color);
     transition: all 0.3s ease;
+}
+
+.survey-card:hover .survey-icon {
+    background: var(--primary-color);
+    color: white;
 }
 
 .survey-card:hover .survey-icon i {
@@ -999,13 +1127,14 @@ header {
     justify-content: center;
 }
 
-.social-links {
+/* Contact Section Social Links */
+.contact-info .social-links {
     display: flex;
     gap: 15px;
     margin-top: 30px;
 }
 
-.social-link {
+.contact-info .social-link {
     width: 40px;
     height: 40px;
     background-color: rgba(67, 97, 238, 0.1);
@@ -1015,9 +1144,36 @@ header {
     justify-content: center;
     color: var(--primary-color);
     transition: var(--transition);
+    text-decoration: none;
 }
 
-.social-link:hover {
+.contact-info .social-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Footer Social Links - separate styling */
+.footer-content .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.footer-content .social-link {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.footer-content .social-link:hover {
     background-color: var(--primary-color);
     color: white;
     transform: translateY(-3px);
@@ -1192,22 +1348,6 @@ footer {
     margin: 0;
 }
 
-.social-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.social-link {
-    color: #fff;
-    font-size: 1.2rem;
-    transition: color 0.3s;
-}
-
-.social-link:hover {
-    color: #4CAF50;
-}
-
 .footer-column h3 {
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
@@ -1362,5 +1502,393 @@ footer {
     
     .cta h2 {
         font-size: 2rem;
+    }
+}
+
+/* Client Marquee Styles */
+.client-marquee-section {
+    padding: 60px 0;
+    background-color: var(--light-bg);
+    overflow: hidden;
+}
+
+.client-marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.client-track {
+    display: flex;
+    animation: marquee 30s linear infinite;
+    width: fit-content;
+}
+
+.client-slide {
+    flex: 0 0 300px;
+    margin: 0 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.client-slide:hover {
+    transform: translateY(-5px);
+}
+
+.client-slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause animation on hover */
+.client-marquee:hover .client-track {
+    animation-play-state: paused;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .client-slide {
+        flex: 0 0 250px;
+    }
+    
+    .client-slide img {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .client-slide {
+        flex: 0 0 200px;
+    }
+    
+    .client-slide img {
+        height: 120px;
+    }
+}
+
+/* Survey Card Illustrations */
+.card-illustration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    opacity: 0.1;
+    transition: opacity 0.3s ease;
+}
+
+.survey-card:hover .card-illustration {
+    opacity: 0.2;
+}
+
+/* Circle Animation */
+.illustration-circle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    top: 20%;
+    left: 20%;
+    animation: circlePulse 3s ease-in-out infinite;
+}
+
+.illustration-dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(var(--primary-color) 2px, transparent 2px);
+    background-size: 20px 20px;
+    animation: dotsMove 20s linear infinite;
+}
+
+/* Waves Animation */
+.illustration-waves {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--primary-color) 0px,
+        var(--primary-color) 2px,
+        transparent 2px,
+        transparent 10px
+    );
+    animation: waveMove 3s ease-in-out infinite;
+}
+
+.illustration-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--primary-color) 0px,
+        var(--primary-color) 1px,
+        transparent 1px,
+        transparent 5px
+    );
+    animation: linesMove 2s ease-in-out infinite;
+}
+
+/* Grid Animation */
+.illustration-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(var(--primary-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--primary-color) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: gridPulse 4s ease-in-out infinite;
+}
+
+.illustration-pulse {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    top: 30%;
+    left: 30%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Bars Animation */
+.illustration-bars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.illustration-bars::before,
+.illustration-bars::after {
+    content: '';
+    width: 10px;
+    background: var(--primary-color);
+    animation: barsMove 2s ease-in-out infinite;
+}
+
+.illustration-bars::before {
+    height: 40%;
+}
+
+.illustration-bars::after {
+    height: 60%;
+    animation-delay: 1s;
+}
+
+.illustration-stats {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 30% 30%, var(--primary-color) 1px, transparent 1px),
+        radial-gradient(circle at 70% 70%, var(--primary-color) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: statsMove 3s ease-in-out infinite;
+}
+
+/* Animation Keyframes */
+@keyframes circlePulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+}
+
+@keyframes dotsMove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100px 100px;
+    }
+}
+
+@keyframes waveMove {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes linesMove {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes gridPulse {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+@keyframes barsMove {
+    0% {
+        height: 30%;
+    }
+    50% {
+        height: 70%;
+    }
+    100% {
+        height: 30%;
+    }
+}
+
+@keyframes statsMove {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Update survey card styles to accommodate illustrations */
+.survey-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.survey-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+.survey-icon {
+    position: relative;
+    z-index: 3;
+}
+
+/* Our Services Section */
+.our-services {
+    background-color: #FF7F27;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.our-services .section-header {
+    margin-bottom: 50px;
+}
+
+.our-services .section-header h2 {
+    color: #FFFFFF;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.our-services .section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 2px;
+    background-color: #FFFFFF;
+}
+
+.our-services .section-header p {
+    color: #FFFFFF;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.service-card {
+    background-color: #FF0000;
+    border-radius: 15px;
+    padding: 30px;
+    color: #FFFFFF;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-card {
+        padding: 20px;
     }
 }

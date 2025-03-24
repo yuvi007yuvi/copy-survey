@@ -17,9 +17,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const navLinksClone = navLinks.cloneNode(true);
             mobileMenu.appendChild(navLinksClone);
             
-            // Clone auth buttons
-            const authButtonsClone = authButtons.cloneNode(true);
-            mobileMenu.appendChild(authButtonsClone);
+            // Clone auth buttons if they exist
+            if (authButtons) {
+                const authButtonsClone = authButtons.cloneNode(true);
+                mobileMenu.appendChild(authButtonsClone);
+                
+                // Style auth buttons in mobile menu
+                authButtonsClone.style.display = 'flex';
+                authButtonsClone.style.flexDirection = 'column';
+                authButtonsClone.style.gap = '10px';
+                authButtonsClone.style.width = '100%';
+                
+                // Style buttons in mobile menu
+                const mobileButtons = authButtonsClone.querySelectorAll('button');
+                mobileButtons.forEach(button => {
+                    button.style.width = '100%';
+                    button.style.padding = '10px';
+                });
+            }
             
             // Add mobile menu to the DOM
             document.body.appendChild(mobileMenu);
@@ -41,19 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
             navLinksClone.style.display = 'flex';
             navLinksClone.style.flexDirection = 'column';
             navLinksClone.style.gap = '15px';
-            
-            // Style auth buttons in mobile menu
-            authButtonsClone.style.display = 'flex';
-            authButtonsClone.style.flexDirection = 'column';
-            authButtonsClone.style.gap = '10px';
-            authButtonsClone.style.width = '100%';
-            
-            // Style buttons in mobile menu
-            const mobileButtons = authButtonsClone.querySelectorAll('button');
-            mobileButtons.forEach(button => {
-                button.style.width = '100%';
-                button.style.padding = '10px';
-            });
         }
         
         // Toggle mobile menu visibility
@@ -170,28 +172,54 @@ document.addEventListener('DOMContentLoaded', function() {
     nextButton.addEventListener('click', nextSlide);
     
     // Touch events
+    let touchStartTime;
+    let touchStartX;
+    let lastTranslate = 0;
+    
     track.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
+        touchStartTime = Date.now();
+        touchStartX = e.touches[0].clientX;
         isDragging = true;
+        lastTranslate = currentTranslate;
     });
     
     track.addEventListener('touchmove', (e) => {
         if (!isDragging) return;
+        e.preventDefault(); // Prevent scrolling while dragging
+        
         const currentX = e.touches[0].clientX;
-        const diff = (currentX - startX) / carousel.offsetWidth * 100;
-        track.style.transform = `translateX(${currentTranslate + diff}%)`;
+        const diff = (currentX - touchStartX) / carousel.offsetWidth * 100;
+        
+        // Limit the drag to prevent overscrolling
+        const maxDrag = 100;
+        const limitedDiff = Math.max(Math.min(diff, maxDrag), -maxDrag);
+        track.style.transform = `translateX(${lastTranslate + limitedDiff}%)`;
     });
     
     track.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
         isDragging = false;
-        const endX = e.changedTouches[0].clientX;
-        const diff = endX - startX;
         
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) prevSlide();
-            else nextSlide();
+        const endX = e.changedTouches[0].clientX;
+        const diff = endX - touchStartX;
+        const timeDiff = Date.now() - touchStartTime;
+        
+        // Handle quick swipes (less than 300ms)
+        if (timeDiff < 300) {
+            if (Math.abs(diff) > 30) {
+                if (diff > 0) prevSlide();
+                else nextSlide();
+            } else {
+                goToSlide(currentIndex);
+            }
         } else {
-            goToSlide(currentIndex);
+            // Handle normal swipes
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) prevSlide();
+                else nextSlide();
+            } else {
+                goToSlide(currentIndex);
+            }
         }
     });
     
