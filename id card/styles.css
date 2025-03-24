@@ -1,0 +1,149 @@
+.id-card {
+    width: 350px;
+    margin: 0 auto;
+    padding: 20px;
+    border: none;
+    border-radius: 12px;
+    background: url('wave-bg.svg') center/cover no-repeat;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.id-card-details {
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.id-card-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #0056b3;
+    position: relative;
+    z-index: 1;
+}
+
+.id-card-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #0056b3;
+}
+
+.company-logo {
+    max-width: 180px;
+    height: auto;
+    margin-bottom: 12px;
+}
+
+.id-card-header h2 {
+    margin: 0;
+    color: #0056b3;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.id-card-photo {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.id-card-photo img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 4px solid #0056b3;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.id-card-details {
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.id-card-details p {
+    margin: 10px 0;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(0, 86, 179, 0.1);
+    background: rgba(0, 86, 179, 0.03);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.id-card-details p:hover {
+    background: rgba(0, 86, 179, 0.06);
+    transform: translateX(5px);
+}
+
+.id-card-details strong {
+    color: #555;
+}
+
+#idCardPreview {
+    transform-origin: top left;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.login-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0056b3, #00284d);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.login-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-box h2 {
+    color: #0056b3;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #idCardPreview, #idCardPreview * {
+        visibility: visible;
+    }
+    #idCardPreview {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
