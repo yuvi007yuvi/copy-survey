@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <!-- Background Elements -->
+  <circle cx="400" cy="300" r="250" fill="#f0f4ff" opacity="0.6"/>
+  <circle cx="500" cy="200" r="80" fill="#e0e8ff" opacity="0.7"/>
+  <circle cx="300" cy="400" r="60" fill="#d0dcff" opacity="0.5"/>
+  
+  <!-- Survey Form -->
+  <rect x="250" y="150" width="300" height="350" rx="10" fill="#ffffff" stroke="#4361ee" stroke-width="2"/>
+  
+  <!-- Form Header -->
+  <rect x="250" y="150" width="300" height="60" rx="10" fill="#4361ee"/>
+  <text x="400" y="185" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle">Counseling Survey</text>
+  
+  <!-- Form Elements -->
+  <!-- Question 1 -->
+  <rect x="270" y="230" width="260" height="40" rx="5" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="285" y="255" font-family="Arial, sans-serif" font-size="14" fill="#333333">How would you rate your session?</text>
+  
+  <!-- Rating Stars -->
+  <g transform="translate(285, 280)">
+    <path d="M10,0 L13,6 L20,7 L15,12 L16,19 L10,16 L4,19 L5,12 L0,7 L7,6 Z" fill="#4cc9f0"/>
+    <path d="M40,0 L43,6 L50,7 L45,12 L46,19 L40,16 L34,19 L35,12 L30,7 L37,6 Z" fill="#4cc9f0"/>
+    <path d="M70,0 L73,6 L80,7 L75,12 L76,19 L70,16 L64,19 L65,12 L60,7 L67,6 Z" fill="#4cc9f0"/>
+    <path d="M100,0 L103,6 L110,7 L105,12 L106,19 L100,16 L94,19 L95,12 L90,7 L97,6 Z" fill="#e0e0e0"/>
+    <path d="M130,0 L133,6 L140,7 L135,12 L136,19 L130,16 L124,19 L125,12 L120,7 L127,6 Z" fill="#e0e0e0"/>
+  </g>
+  
+  <!-- Question 2 -->
+  <rect x="270" y="320" width="260" height="40" rx="5" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="285" y="345" font-family="Arial, sans-serif" font-size="14" fill="#333333">What areas need improvement?</text>
+  
+  <!-- Checkboxes -->
+  <rect x="285" y="370" width="15" height="15" rx="2" fill="#ffffff" stroke="#4361ee" stroke-width="2"/>
+  <text x="310" y="383" font-family="Arial, sans-serif" font-size="12" fill="#333333">Communication</text>
+  
+  <rect x="285" y="395" width="15" height="15" rx="2" fill="#ffffff" stroke="#4361ee" stroke-width="2"/>
+  <rect x="287" y="397" width="11" height="11" rx="1" fill="#4361ee"/>
+  <text x="310" y="408" font-family="Arial, sans-serif" font-size="12" fill="#333333">Resources</text>
+  
+  <rect x="285" y="420" width="15" height="15" rx="2" fill="#ffffff" stroke="#4361ee" stroke-width="2"/>
+  <text x="310" y="433" font-family="Arial, sans-serif" font-size="12" fill="#333333">Follow-up</text>
+  
+  <!-- Submit Button -->
+  <rect x="350" y="460" width="100" height="30" rx="5" fill="#4361ee"/>
+  <text x="400" y="480" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">Submit</text>
+  
+  <!-- Decorative Elements -->
+  <!-- Charts -->
+  <g transform="translate(550, 200)">
+    <!-- Pie Chart -->
+    <circle cx="0" cy="0" r="40" fill="#ffffff" stroke="#3a0ca3" stroke-width="2"/>
+    <path d="M0,0 L40,0 A40,40 0 0,1 20,34.64 z" fill="#4361ee"/>
+    <path d="M0,0 L20,34.64 A40,40 0 0,1 -34.64,20 z" fill="#4cc9f0"/>
+    <path d="M0,0 L-34.64,20 A40,40 0 0,1 -20,-34.64 z" fill="#3a0ca3"/>
+    <path d="M0,0 L-20,-34.64 A40,40 0 0,1 40,0 z" fill="#f72585"/>
+  </g>
+  
+  <!-- Bar Chart -->
+  <g transform="translate(550, 350)">
+    <rect x="-50" y="-60" width="100" height="60" rx="5" fill="#ffffff" stroke="#3a0ca3" stroke-width="2"/>
+    <rect x="-40" y="-50" width="15" height="40" fill="#4361ee"/>
+    <rect x="-15" y="-30" width="15" height="20" fill="#4cc9f0"/>
+    <rect x="10" y="-45" width="15" height="35" fill="#3a0ca3"/>
+    <rect x="35" y="-25" width="15" height="15" fill="#f72585"/>
+  </g>
+  
+  <!-- Floating Icons -->
+  <!-- Clipboard -->
+  <g transform="translate(180, 250)">
+    <rect x="-15" y="-20" width="30" height="40" rx="3" fill="#ffffff" stroke="#3a0ca3" stroke-width="2"/>
+    <rect x="-10" y="-15" width="20" height="5" rx="1" fill="#f0f4ff"/>
+    <rect x="-10" y="-5" width="20" height="5" rx="1" fill="#f0f4ff"/>
+    <rect x="-10" y="5" width="20" height="5" rx="1" fill="#f0f4ff"/>
+  </g>
+  
+  <!-- Chat Bubble -->
+  <g transform="translate(180, 350)">
+    <path d="M-25,-15 H25 C30,-15 35,-10 35,-5 V15 C35,20 30,25 25,25 H5 L-5,35 L-5,25 H-25 C-30,25 -35,20 -35,15 V-5 C-35,-10 -30,-15 -25,-15 Z" fill="#ffffff" stroke="#4361ee" stroke-width="2"/>
+    <circle cx="-15" cy="5" r="3" fill="#4361ee"/>
