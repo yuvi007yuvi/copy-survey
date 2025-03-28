@@ -72,98 +72,20 @@ document.getElementById('validUntil').addEventListener('input', function(e) {
     previewElements.validUntil.textContent = formattedDate;
 });
 
-// Helper function to prepare ID card element for export
-function prepareIdCardForExport() {
-    const element = document.getElementById('idCardPreview');
-    const clone = element.cloneNode(true);
-    
-    clone.style.position = 'relative';
-    clone.style.width = '350px';
-    clone.style.margin = '0';
-    clone.style.padding = '20px';
-    
-    const waveBg = clone.querySelector('.wave-bg');
-    if (waveBg) {
-        waveBg.style.position = 'absolute';
-        waveBg.style.opacity = '0.8';
-    }
-    
-    return clone;
-}
-
-// Helper function to get file name base
-function getFileNameBase() {
-    const name = previewElements.name.textContent.toLowerCase().replace(/\s+/g, '-');
-    const timestamp = new Date().toISOString().split('T')[0];
-    return `id-card-${name}-${timestamp}`;
-}
-
 // Generate PDF
-document.getElementById('generatePDF').addEventListener('click', async function() {
-    this.disabled = true;
-    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+document.getElementById('generatePDF').addEventListener('click', function() {
+    const element = document.getElementById('idCardPreview');
+    const opt = {
+        margin: 1,
+        filename: 'id-card.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
 
-    try {
-        const clone = prepareIdCardForExport();
-        const opt = {
-            margin: [10, 10, 10, 10],
-            filename: `${getFileNameBase()}.pdf`,
-            image: { type: 'jpeg', quality: 1 },
-            html2canvas: {
-                scale: 2,
-                useCORS: true,
-                logging: true,
-                letterRendering: true,
-                allowTaint: true,
-                backgroundColor: '#ffffff'
-            },
-            jsPDF: {
-                unit: 'mm',
-                format: 'a4',
-                orientation: 'portrait'
-            }
-        };
-
-        await html2pdf().set(opt).from(clone).save();
-    } catch (error) {
+    // Generate PDF
+    html2pdf().set(opt).from(element).save().catch(function(error) {
         console.error('Error generating PDF:', error);
         alert('There was an error generating the PDF. Please try again.');
-    } finally {
-        this.disabled = false;
-        this.innerHTML = '<i class="fas fa-file-pdf"></i> Export as PDF';
-    }
-});
-
-// Generate Image
-document.getElementById('generateImage').addEventListener('click', async function() {
-    this.disabled = true;
-    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating Image...';
-
-    try {
-        const clone = prepareIdCardForExport();
-        document.body.appendChild(clone);
-
-        const canvas = await html2canvas(clone, {
-            scale: 2,
-            useCORS: true,
-            logging: true,
-            letterRendering: true,
-            allowTaint: true,
-            backgroundColor: '#ffffff'
-        });
-
-        document.body.removeChild(clone);
-
-        // Create download link
-        const link = document.createElement('a');
-        link.download = `${getFileNameBase()}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-    } catch (error) {
-        console.error('Error generating image:', error);
-        alert('There was an error generating the image. Please try again.');
-    } finally {
-        this.disabled = false;
-        this.innerHTML = '<i class="fas fa-image"></i> Export as Image';
-    }
+    });
 });

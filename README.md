@@ -57,7 +57,16 @@ DS Counseling Poll Metrics is a powerful survey platform that enables counselors
 ## Contact
 
 For questions or support, please contact:
+
+Contact Person 1:
+- Name: Anshul Sharma
 - Email: anshulsharma7399@gmail.com
+- Phone: +91 1234567890
+
+Contact Person 2:
+- Name: Sachin Yadav
+- Email: Sachinshikohabad7800@gmail.com
+- Phone: +91 7055926102
 
 ## License
 

@@ -4,83 +4,45 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelector('.nav-links');
     const authButtons = document.querySelector('.auth-buttons');
     
-    hamburger.addEventListener('click', function() {
+    // Create mobile menu on page load
+    const mobileMenu = document.createElement('div');
+    mobileMenu.classList.add('mobile-menu');
+    mobileMenu.style.display = 'none'; // Set initial display state
+    document.body.appendChild(mobileMenu);
+    
+    // Clone and append navigation links
+    const navLinksClone = navLinks.cloneNode(true);
+    mobileMenu.appendChild(navLinksClone);
+    
+    hamburger.addEventListener('click', function(event) {
+        event.stopPropagation(); // Prevent event from bubbling up
         // Toggle hamburger animation
         hamburger.classList.toggle('active');
         
-        // Create mobile menu if it doesn't exist
-        if (!document.querySelector('.mobile-menu')) {
-            const mobileMenu = document.createElement('div');
-            mobileMenu.classList.add('mobile-menu');
-            
-            // Clone nav links
-            const navLinksClone = navLinks.cloneNode(true);
-            mobileMenu.appendChild(navLinksClone);
-            
-            // Clone auth buttons if they exist
-            if (authButtons) {
-                const authButtonsClone = authButtons.cloneNode(true);
-                mobileMenu.appendChild(authButtonsClone);
-                
-                // Style auth buttons in mobile menu
-                authButtonsClone.style.display = 'flex';
-                authButtonsClone.style.flexDirection = 'column';
-                authButtonsClone.style.gap = '10px';
-                authButtonsClone.style.width = '100%';
-                
-                // Style buttons in mobile menu
-                const mobileButtons = authButtonsClone.querySelectorAll('button');
-                mobileButtons.forEach(button => {
-                    button.style.width = '100%';
-                    button.style.padding = '10px';
-                });
-            }
-            
-            // Add mobile menu to the DOM
-            document.body.appendChild(mobileMenu);
-            
-            // Add styles to mobile menu
-            mobileMenu.style.position = 'fixed';
-            mobileMenu.style.top = '70px';
-            mobileMenu.style.left = '0';
-            mobileMenu.style.width = '100%';
-            mobileMenu.style.backgroundColor = 'white';
-            mobileMenu.style.padding = '20px';
-            mobileMenu.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-            mobileMenu.style.zIndex = '999';
-            mobileMenu.style.display = 'none';
-            mobileMenu.style.flexDirection = 'column';
-            mobileMenu.style.gap = '20px';
-            
-            // Style nav links in mobile menu
-            navLinksClone.style.display = 'flex';
-            navLinksClone.style.flexDirection = 'column';
-            navLinksClone.style.gap = '15px';
-        }
-        
         // Toggle mobile menu visibility
-        const mobileMenu = document.querySelector('.mobile-menu');
-        mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'flex' : 'none';
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(event) {
-        const mobileMenu = document.querySelector('.mobile-menu');
-        if (mobileMenu && mobileMenu.style.display === 'flex' && !hamburger.contains(event.target) && !mobileMenu.contains(event.target)) {
-            mobileMenu.style.display = 'none';
-            hamburger.classList.remove('active');
+        if (mobileMenu) {
+            mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'flex' : 'none';
         }
     });
-    
-    // Close mobile menu when window is resized
-    window.addEventListener('resize', function() {
-        const mobileMenu = document.querySelector('.mobile-menu');
-        if (mobileMenu && window.innerWidth > 768) {
-            mobileMenu.style.display = 'none';
-            hamburger.classList.remove('active');
-        }
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            if (mobileMenu && mobileMenu.style.display === 'flex' && !hamburger.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.style.display = 'none';
+                hamburger.classList.remove('active');
+            }
+        });
+        
+        // Close mobile menu when window is resized
+        window.addEventListener('resize', function() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            if (mobileMenu && window.innerWidth > 768) {
+                mobileMenu.style.display = 'none';
+                hamburger.classList.remove('active');
+            }
+        });
     });
-});
+;
 
 // Smooth Scrolling for Navigation Links
 document.addEventListener('DOMContentLoaded', function() {

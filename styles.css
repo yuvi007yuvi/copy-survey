@@ -1445,9 +1445,45 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .nav-links,
-    .auth-buttons {
+    .navbar .nav-links,
+    .navbar .auth-buttons {
         display: none;
+    }
+    
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+    
+    .mobile-menu .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .mobile-menu .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .mobile-menu .nav-links a {
+        display: block;
+        padding: 10px;
+        color: var(--text-color);
+        transition: var(--transition);
+    }
+    
+    .mobile-menu .nav-links a:hover {
+        background-color: var(--light-bg);
+        color: var(--primary-color);
     }
     
     .hamburger {
