@@ -1542,6 +1542,112 @@ footer {
 }
 
 /* Client Marquee Styles */
+.leadership-team {
+    padding: 80px 0;
+    background-color: var(--white);
+}
+
+.leadership-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+
+.leader-card {
+    background: var(--bg-color);
+    border: none;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.leader-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.leader-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.leader-card:hover {
+    transform: translateY(-10px);
+}
+
+.leader-image {
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.leader-image img {
+    width: 100%;
+    border-radius: 12px;
+    transition: transform 0.5s ease;
+}
+
+.leader-card:hover .leader-image img {
+    transform: scale(1.05);
+}
+
+.leader-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.leader-info h3 {
+    color: var(--secondary-color);
+    margin-bottom: 8px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.leader-title {
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.leader-contact {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.leader-contact p {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    color: var(--light-text);
+    transition: color 0.3s ease;
+}
+
+.leader-contact p:hover {
+    color: var(--primary-color);
+}
+
+.leader-contact i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
 .client-marquee-section {
     padding: 60px 0;
     background-color: var(--light-bg);
